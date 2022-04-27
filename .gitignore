@@ -1,0 +1,11 @@
+*.cma
+*.cmxa
+*.o
+*.cmi
+*.cmo
+*.cmx
+*.a
+.depend
+*~
+*.opt
+*.norm
