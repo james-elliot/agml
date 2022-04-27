@@ -35,5 +35,6 @@ main.norm :  $(NORM_OBJS)
 	$(OCAMLOPT) $(FLAGS_OPT) -c $<
 
 clean:
-	\rm -f *.cmo *.cmi *.cmx *.o *.a *.cma *.cmxa *.opt *.norm *~
+	\rm -f *.cmo *.cmi *.cmx *.o *.a *.cma *.cmxa *.opt *.norm *~ res.txt net
+
 
