@@ -29,7 +29,7 @@
 (** Scaling. *)
 
 val scale :
-    int -> 'a Ga_types.population -> Ga_types.gvars -> 'a Ga_types.chromosome
+    int -> 'a Ga_types.population -> Ga_types.gvars -> Domainslib.Task.pool -> 'a Ga_types.chromosome
 (** [scale numgen population cfg] scales the [population] according to the
     method specified in [cfg].
     @return The best element in the [population]. *)

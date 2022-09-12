@@ -4,7 +4,7 @@ OCAMLOPT = $(obin)/ocamlopt
 OCAMLDEP = $(obin)/ocamldep
 OCAMLDOC = $(obin)/ocamldoc
 
-parmapdir = $(shell opam var parmap:lib)
+parmapdir = $(shell opam var domainslib:lib)
 INCLUDES = -I $(parmapdir) -I ..
 #FLAGS_BIN = $(INCLUDES) -g -annot
 FLAGS_BIN = $(INCLUDES) -g
@@ -15,7 +15,7 @@ INTERF = $(FILES:.mli=.cmi)
 NORM_OBJS =  $(FILES:.ml=.cmo)
 OPT_OBJS=  $(FILES:.ml=.cmx)
 
-LIBS=  str.cma unix.cma parmap.cma ag.cma 
+LIBS=  str.cma unix.cma domainslib.cma ag.cma 
 
 all : main.opt main.norm
 
@@ -35,6 +35,5 @@ main.norm :  $(NORM_OBJS)
 	$(OCAMLOPT) $(FLAGS_OPT) -c $<
 
 clean:
-	\rm -f *.cmo *.cmi *.cmx *.o *.a *.cma *.cmxa *.opt *.norm *~ res.txt net
-
+	\rm -f *.cmo *.cmi *.cmx *.o *.a *.cma *.cmxa *.opt *.norm *~
 

@@ -57,7 +57,7 @@ module type LOCAL = sig
     result
 
 end
-
+module T = Domainslib.Task;;
 module Make(L : LOCAL) = struct
 
   open Ga_types
@@ -65,6 +65,7 @@ module Make(L : LOCAL) = struct
   exception Sortie_boucle of int
 
   let opti = fun user ->
+    let pool = T.setup_pool ~num_additional_domains:(L.gvars.ncores - 1) () in
     L.init user;
     let distance = L.distance user
     and barycenter = L.barycenter user
@@ -83,7 +84,7 @@ module Make(L : LOCAL) = struct
           let t1 = Unix.gettimeofday() in
       	  let pop= L.prepare_gen user numgen pop in
           let t2 = Unix.gettimeofday() in
-      	  let best = Ga_scale.scale numgen pop L.gvars in
+      	  let best = Ga_scale.scale numgen pop L.gvars pool in
           let t3 = Unix.gettimeofday() in
       	  L.after_scale user numgen pop best;
           let t4 = Unix.gettimeofday() in

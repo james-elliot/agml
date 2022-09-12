@@ -2,7 +2,7 @@
 (* L'optimum (101) est obtenu avec un vecteur dont toutes les coordonnées valent 0 *)
 
 (* dimension du problème *)
-let dim=10;;
+let dim=100;;
 
  (*la fonction a minimiser*)
 let f x =  
