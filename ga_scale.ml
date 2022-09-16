@@ -83,46 +83,17 @@ let ranking = fun pop ->
 
 module T = Domainslib.Task;;
 
-(*
-
 let scale = fun numgen pop gvars pool ->
-  let rfit = 
-    if gvars.ncores=1 then 
-      Array.map (fun x -> Lazy.force x.r_fit) pop 
-    else (
-      let r = Array.make (Array.length pop) 0. in
-      T.run pool
-        (fun _ -> 
-          T.parallel_for 0 (Array.length pop -1)
-            (fun i -> r.(i)<- Lazy.force pop.(i).r_fit) pool);
-      r
-    )
-  in
-  if gvars.ncores>1 then Array.iteri (fun i x -> x.r_fit <- (lazy rfit.(i))) pop;
-  Array.iteri (fun i x -> x.s_fit <- rfit.(i)) pop;
-  let e = normalize pop in
-  match gvars.scaling with
-  | No_scaling -> e
-  | Sigma_truncation -> sigma_truncation pop
-  | Power_low -> power_low numgen pop gvars.nbgens
-  | Ranking -> ranking pop
-
-
- *)
-let scale = fun numgen pop gvars pool ->
-  if gvars.ncores>1 then (
+  if gvars.ncores>1 then 
     T.run pool
       (fun _ -> 
         T.parallel_for 0 (Array.length pop -1)
-          (fun i -> ignore (Lazy.force pop.(i).r_fit)) pool);
-  );
-
-  Array.iteri (fun i x -> x.s_fit <- Lazy.force pop.(i).r_fit) pop;
+          (fun i -> pop.(i).s_fit <- Lazy.force pop.(i).r_fit) pool)
+  else
+    Array.iteri (fun i _ -> pop.(i).s_fit <- Lazy.force pop.(i).r_fit) pop;
   let e = normalize pop in
   match gvars.scaling with
   | No_scaling -> e
   | Sigma_truncation -> sigma_truncation pop
   | Power_low -> power_low numgen pop gvars.nbgens
-  | Ranking -> ranking pop
-
-
+  | Ranking -> ranking pop;;

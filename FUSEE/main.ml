@@ -2,8 +2,6 @@ module L = struct
   open Ga_types
     
   let gvars = Ga_cfg.read_config "general.cfg"
-  let outc = Unix.open_process_out "/usr/bin/gnuplot" 
-  let plotline = "plot 'res.txt' u 1:2 w lp"
     
   type data = float array array array
   type user_data= unit
@@ -186,8 +184,11 @@ let scale tab l i k =
   newa;;
 
 
+(*
+  let outc = Unix.open_process_out "/usr/bin/gnuplot" ;;
+  let plotline = "plot 'res.txt' u 1:2 w lp";;
 
-  let tmp = ref true
+  let tmp = ref true;;
            
   let print_data c data = 
     print_newline ();
@@ -199,8 +200,9 @@ let scale tab l i k =
     print_newline();
     if !tmp then (
       let _ = input_line stdin in
-      tmp := false)
-
+      tmp := false);;
+ *)
+  let print_data c data = ();;
       
   let distance u d1 d2 = 
   let d = ref 0. in

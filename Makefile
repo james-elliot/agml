@@ -5,7 +5,7 @@ OCAMLDEP = $(obin)/ocamldep
 OCAMLDOC = $(obin)/ocamldoc
 
 parmapdir = $(shell opam var domainslib:lib)
-INCLUDES = -I $(parmapdir)
+INCLUDES = -I $(parmapdir) -I +unix -I +str
 #FLAGS_BIN = $(INCLUDES) -g -annot
 FLAGS_BIN = $(INCLUDES) -g
 FLAGS_OPT = $(INCLUDES) -unsafe -noassert -inline 100
