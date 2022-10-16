@@ -65,7 +65,8 @@ module Make(L : LOCAL) = struct
   exception Sortie_boucle of int
 
   let opti = fun user ->
-    let pool = T.setup_pool ~num_additional_domains:(L.gvars.ncores - 1) () in
+    (*    let pool = T.setup_pool ~num_additional_domains:(L.gvars.ncores - 1) () in*)
+    let pool = T.setup_pool (L.gvars.ncores - 1) () in
     L.init user;
     let distance = L.distance user
     and barycenter = L.barycenter user
